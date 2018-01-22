@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+   int sz = 10;
+   int sz1 = 10,j;
+   int fd;
+   int buf = 0;
+   int buf1 = 0;
+   ssize_t ret;
+   ssize_t ret1;
+   off_t ls;
+   char date[10] = {"abscdefges"};
+   char date1[10] = {"abscdehjkl"};
+   fd = open("text",O_CREAT | O_RDWR);
+
+   if(fd < 0){
+
+      printf("Error NUmber %d\n",errno);
+      perror("Program");
+      exit(1);
+    
+   }
+   
+   while(sz != 0 && (ret = write (fd, date, sz))!= 0){
+        if(ret == -1){
+           if(errno == EINTR)
+                continue;
+            perror ("write");
+	    break;
+        }
+       sz -=ret;
+       buf +=ret;
+   }
+   
+   ls = lseek (fd, (off_t)100, SEEK_SET);
+   if(ls == (off_t) -1){
+      printf("lseek error %d\n", errno);
+      
+   }
+   
+   while(sz1 != 0 && (ret1 = write (fd, date1, sz1))!= 0){
+        if(ret1 == -1){
+           if(errno == EINTR)
+                continue;
+            perror ("write");
+	    break;
+        }
+       sz1 -=ret1;
+       buf +=ret1;
+   }
+   
+
+
+ return 0;
+
+}
+
