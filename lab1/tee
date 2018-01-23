@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main(){
+ 
+  int len = 5;
+  char str[10],str1[10],str2[10];
+  int fd;
+  ssize_t wr;
+  char buf[6] = "Nazym";
+  printf("Enter the command:\n");
+  scanf("%s %s %s",str,str1,str2);
+   
+  fd = open(str2, O_CREAT | O_WRONLY | O_APPEND);
+  if(fd < 0){
+
+      printf("Error NUmber %d\n",errno);
+      perror("Program");
+      exit(1);
+   }
+   
+   if(lseek(fd, 0, SEEK_END) == -1)
+       printf("lseek");
+
+   if(write(fd,buf, len)!= len)
+       printf("Partial/failed write");   
+ 
+
+ 
+
+
+
+ return 0;
+}
