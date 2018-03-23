@@ -1,0 +1,25 @@
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
+
+int n,m;
+char *users[3]={"Aru","Nazym", "Assem"};
+char *passwords[3]={"12345","123","111"};
+
+
+
+
+
+int main(int argc, char *argv[])
+{
+    int i = 0;
+    for(i = 0; i < 3; i++ ){
+       printf("%s ", users[i]);
+    }
+}
